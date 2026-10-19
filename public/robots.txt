@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /checkout.html
+Sitemap: https://rachelmartinoart.com/sitemap.xml

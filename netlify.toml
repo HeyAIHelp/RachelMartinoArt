@@ -1,0 +1,8 @@
+# Netlify reads this automatically when the GitHub repo is connected.
+[build]
+  publish = "public"              # the website
+  functions = "netlify/functions" # server code: checkout payments + markets calendar
+
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["public/catalog.js", "public/cart-math.js"]
