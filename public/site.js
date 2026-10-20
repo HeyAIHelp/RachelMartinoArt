@@ -131,7 +131,7 @@ if (productGrid) catalogReady.then(cat => {
     <article class="card" data-kind="${p.kind}">
       <div class="img"><img loading="lazy" src="${IMG(p.img)}" alt="${esc(p.name)}, ${kindLabel[p.kind]} by Rachel Martino"></div>
       <div class="body">
-        <span class="kind">${kindLabel[p.kind]}</span>
+        <span class="kind">${esc(p.label || kindLabel[p.kind])}</span>
         <h3>${esc(p.name)}</h3>
         <p>${esc(p.blurb)}</p>
         <div class="row">
@@ -150,6 +150,10 @@ document.addEventListener("click", e => {
   openCart();
 });
 
+catalogReady.then(cat => $$(".chip[data-filter]").forEach(chip => {
+  const f = chip.dataset.filter;
+  chip.hidden = f !== "all" && !cat.products.some(p => p.kind === f);
+}));
 $$(".chip").forEach(chip => chip.addEventListener("click", () => {
   $$(".chip").forEach(c => c.setAttribute("aria-pressed", c === chip));
   const f = chip.dataset.filter;

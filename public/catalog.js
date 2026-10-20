@@ -2,7 +2,8 @@
    THE PRODUCT LIST: the one place to edit products, prices and shipping.
    Prices are in CENTS (4500 = $45.00). The checkout re-reads prices from
    this file on the server, so shoppers can't change what they pay.
-   'img' is the photo name.
+   'img' is the photo name in images/art/. Optional 'label' replaces the
+   small category line on the card (e.g. "holiday card pack").
    ===================================================================== */
 (function (root) {
   const CATALOG = {
@@ -14,44 +15,55 @@
     },
     "products": [
       {
-        "id": "swallowtail",
-        "name": "Swallowtail",
-        "kind": "print",
-        "img": "IMG_8684",
-        "priceCents": 4500,
-        "blurb": "Hand-carved block print, butter yellow on bark-brown paper."
+        "id": "holiday-elk-pack",
+        "name": "Holiday Elk Pack",
+        "kind": "card",
+        "label": "holiday card pack",
+        "img": "holiday-elk",
+        "priceCents": 3000,
+        "blurb": "Two each of my three bestselling elk print cards. 4×6 folded, hand-printed."
       },
       {
-        "id": "octopus-of-the-bay",
-        "name": "Octopus of the Bay",
+        "id": "holiday-lights-pack",
+        "name": "Holiday Lights Pack",
+        "kind": "card",
+        "label": "holiday card pack",
+        "img": "holiday-lights",
+        "priceCents": 3000,
+        "blurb": "Six of my candle cards in assorted colors, hand-picked by me. 4×6 folded, hand-printed."
+      },
+      {
+        "id": "holiday-gift-pack",
+        "name": "Holiday Gift Pack",
+        "kind": "card",
+        "label": "holiday card pack",
+        "img": "holiday-gift",
+        "priceCents": 4000,
+        "blurb": "Eight 4×6 hand-printed holiday cards in festive winter colors and designs. I pick them for you!"
+      },
+      {
+        "id": "pacific-giant-octopus",
+        "name": "Pacific Giant Octopus",
         "kind": "print",
         "img": "IMG_8837",
         "priceCents": 5500,
         "blurb": "Eight arms, one sunset gradient. Hand-pulled relief print."
       },
       {
-        "id": "marigold-patch",
-        "name": "Marigold Patch",
+        "id": "marigold-on-black",
+        "name": "Marigold on Black",
         "kind": "card",
         "img": "IMG_9405",
         "priceCents": 700,
-        "blurb": "Hand-printed greeting card, blank inside for your own words."
+        "blurb": "Hand-printed marigolds on black. Blank inside for your own words."
       },
       {
-        "id": "poppy-bouquet",
-        "name": "Poppy Bouquet",
+        "id": "marigold-on-white",
+        "name": "Marigold on White",
         "kind": "card",
         "img": "IMG_9865",
         "priceCents": 700,
-        "blurb": "Red-orange blooms printed on cream. Envelope included."
-      },
-      {
-        "id": "whale-song",
-        "name": "Whale Song",
-        "kind": "print",
-        "img": "IMG_9492",
-        "priceCents": 4000,
-        "blurb": "Humpbacks under a galaxy sky, printed over a hand-blended field."
+        "blurb": "Hand-printed marigolds on white. Blank inside for your own words."
       },
       {
         "id": "forest-floor",
@@ -60,22 +72,6 @@
         "img": "IMG_9502",
         "priceCents": 700,
         "blurb": "Chanterelles and woodgrain: a love letter to fall foraging."
-      },
-      {
-        "id": "tide-pool-pack",
-        "name": "Tide Pool Card Pack",
-        "kind": "card",
-        "img": "IMG_0158",
-        "priceCents": 2400,
-        "blurb": "A mixed bundle of sea creatures and botanicals. No two packs match."
-      },
-      {
-        "id": "spiral-tee",
-        "name": "Spiral Tie-Dye Tee",
-        "kind": "apparel",
-        "img": "IMG_9224",
-        "priceCents": 3800,
-        "blurb": "Hand-dyed cotton in a riot of color. Truly one of a kind."
       }
     ]
   };
