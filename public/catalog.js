@@ -4,6 +4,8 @@
    this file on the server, so shoppers can't change what they pay.
    'img' is the photo name in images/art/. Optional 'label' replaces the
    small category line on the card (e.g. "holiday card pack").
+   "soldOut": true keeps a piece in the shop with a SOLD OUT stamp and an
+   "Ask about this piece" button; it can't be bought. Delete the line to restock.
    ===================================================================== */
 (function (root) {
   const CATALOG = {
@@ -72,7 +74,25 @@
         "img": "IMG_9502",
         "priceCents": 700,
         "blurb": "Chanterelles and woodgrain: a love letter to fall foraging."
-      }
+      },
+    {
+      "id": "swallowtail",
+      "name": "Swallowtail",
+      "kind": "print",
+      "img": "IMG_8684",
+      "priceCents": 4500,
+      "soldOut": true,
+      "blurb": "Hand-carved block print, butter yellow on bark-brown paper."
+    },
+    {
+      "id": "whale-song",
+      "name": "Whale Song",
+      "kind": "print",
+      "img": "IMG_9492",
+      "priceCents": 4000,
+      "soldOut": true,
+      "blurb": "Humpbacks under a galaxy sky, printed over a hand-blended field."
+    }
     ]
   };
   if (typeof module === "object" && module.exports) module.exports = CATALOG;

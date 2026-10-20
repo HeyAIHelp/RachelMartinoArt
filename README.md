@@ -77,12 +77,15 @@ Changes show on the site within about 10 minutes. Past events disappear on their
 ## Day to day
 - **New orders** show in the Square Dashboard / Square app under Orders, with the shipping address or "pickup". Turn on order notifications in the Square app so Rachel gets alerted.
 - **Products, prices, shipping:** edit `public/catalog.js` (prices in cents: 4500 = $45), commit, push. That's the only place prices live.
+- **Sold out:** add `"soldOut": true` to a product in `catalog.js`. It stays in the shop (at the end) with a SOLD OUT stamp and an "Ask about this piece" button, and checkout won't sell it. Delete the line to restock.
+- **Gallery:** edit the `GALLERY` list in `site.js`. To keep rows even, the number of regular (non-`true`) photos must be a multiple of 4.
 - **Photos:** add to `public/images/art/` as `NAME-900.jpg` and `NAME-1600.jpg`, then reference `NAME` in `catalog.js` or the gallery list in `site.js`.
 - **Refunds:** done in Square, as usual.
 
 ## Still placeholders (confirm with Rachel before launch)
 - All 8 products, descriptions and prices in `catalog.js` (incl. how many cards are in the Tide Pool pack, and whether envelopes are included)
 - Shipping: $6 flat, free over $75, free local pickup in Newport
+- Are sold-out prints ever reprinted? (if not, Rachel may prefer them gallery-only)
 - "10% off your first order": the sign-up form only emails Rachel; there's no discount code at checkout yet
 
 ---

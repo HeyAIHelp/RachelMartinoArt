@@ -6,17 +6,22 @@ const CONTACT_EMAIL = "rachel@rachelmartinoart.com";
 
 const IMG = (id, w = 900) => `images/art/${id}-${w > 900 ? 1600 : 900}.jpg`;  // photos live in images/art (900px + 1600px)
 
-// Shown in this order in an even grid. `true` = big featured tile (keep two).
+// Shown in this order in an even grid. `true` = big featured tile.
+// To keep rows even: (regular photos) must be a multiple of 4.
+// Now: 1 big + 12 regular = 4 full rows on desktop.
 const GALLERY = [
   ["IMG_8623","octopus at Yaquina Bay", true],
-  ["IMG_9803","poppies, block & print"],
+  ["holiday-elk","holiday elk cards"],
+  ["IMG_9803","marigolds, block & print"],
+  ["holiday-lights","candle cards, all lit up"],
   ["IMG_8684","swallowtail"],
+  ["IMG_8837","pacific giant octopus"],
+  ["holiday-gift","holiday card spread"],
   ["IMG_9224","dye day!"],
-  ["IMG_8837","sunset octopus"],
   ["IMG_9492","whales x2"],
   ["IMG_9502","chanterelle season"],
-  ["IMG_0158","the card table", true],
-  ["IMG_9405","marigolds"],
+  ["IMG_0158","the card table"],
+  ["IMG_9405","marigold on black"],
   ["IMG_9865","fresh off the press"],
 ];
 
@@ -123,20 +128,25 @@ document.addEventListener("cart:change", () => { updateCount(); if (drawer.class
 window.addEventListener("storage", e => { if (e.key === Cart.KEY) document.dispatchEvent(new CustomEvent("cart:change")); });
 updateCount();
 
-/* ---------- products (shop page shows all; home shows data-limit) ---------- */
+/* ---------- products (shop page shows all, sold-out last; home shows data-limit, available only) ---------- */
 const productGrid = $("#products");
 if (productGrid) catalogReady.then(cat => {
-  const limit = Number(productGrid.dataset.limit) || cat.products.length;
-  productGrid.innerHTML = cat.products.slice(0, limit).map(p => `
-    <article class="card" data-kind="${p.kind}">
-      <div class="img"><img loading="lazy" src="${IMG(p.img)}" alt="${esc(p.name)}, ${kindLabel[p.kind]} by Rachel Martino"></div>
+  const limit = Number(productGrid.dataset.limit);
+  const list = limit
+    ? cat.products.filter(p => !p.soldOut).slice(0, limit)
+    : [...cat.products.filter(p => !p.soldOut), ...cat.products.filter(p => p.soldOut)];
+  productGrid.innerHTML = list.map(p => `
+    <article class="card${p.soldOut ? " sold" : ""}" data-kind="${p.kind}">
+      <div class="img"><img loading="lazy" src="${IMG(p.img)}" alt="${esc(p.name)}, ${kindLabel[p.kind]} by Rachel Martino">${p.soldOut ? `<span class="sold-stamp">Sold out</span>` : ""}</div>
       <div class="body">
         <span class="kind">${esc(p.label || kindLabel[p.kind])}</span>
         <h3>${esc(p.name)}</h3>
         <p>${esc(p.blurb)}</p>
         <div class="row">
-          <span class="price">${money(p.priceCents)}</span>
-          <button class="btn" data-add="${p.id}">Add to cart</button>
+          ${p.soldOut
+            ? `<a class="btn ghost" href="contact.html?about=${encodeURIComponent(p.name)}">Ask about this piece</a>`
+            : `<span class="price">${money(p.priceCents)}</span>
+               <button class="btn" data-add="${p.id}">Add to cart</button>`}
         </div>
       </div>
     </article>`).join("");
@@ -309,6 +319,12 @@ if (eventsBox || calBox || nextBox) {
    To receive messages without that step, point the form's `action` at a
    form service (e.g. Formspree) and delete this handler. */
 const noteForm = $("#contact-form");
+// arriving from a sold-out piece's "Ask about this piece" button (contact.html?about=Swallowtail)
+const askAbout = noteForm && new URLSearchParams(location.search).get("about");
+if (askAbout) {
+  noteForm.elements.topic.value = "A question about a piece";
+  noteForm.elements.message.value = `Hi Rachel! I saw the ${askAbout.slice(0, 80)} is sold out. Will there be more, or something similar?`;
+}
 if (noteForm) noteForm.addEventListener("submit", e => {
   e.preventDefault();
   const d = new FormData(noteForm);

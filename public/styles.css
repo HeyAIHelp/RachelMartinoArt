@@ -418,3 +418,15 @@ dialog .x{position:fixed;top:16px;right:20px;background:var(--paper);border:2px 
 .press.in{opacity:1;translate:0 0;scale:1;rotate:0deg;filter:drop-shadow(0 0 0 rgba(43,29,20,0))}
 @media (prefers-reduced-motion:reduce){.press{opacity:1;translate:none;scale:none;rotate:none;filter:none;transition:none}}
 @media print{.press{opacity:1 !important;translate:none !important;scale:none !important;rotate:none !important;filter:none !important}}
+
+/* ---------- sold-out pieces ---------- */
+.card .img{position:relative}
+.card.sold .img img{filter:saturate(.55) brightness(.92)}
+.sold-stamp{
+  position:absolute;top:50%;left:50%;translate:-50% -50%;rotate:-12deg;
+  font:800 26px/1 Fraunces,serif;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--poppy);background:rgba(255,250,240,.88);border:3px solid var(--poppy);border-radius:4px;
+  padding:10px 16px;box-shadow:0 0 0 3px rgba(255,250,240,.88),0 6px 14px rgba(43,29,20,.35);pointer-events:none;white-space:nowrap;
+}
+.card.sold .row{justify-content:flex-end}
+.card.sold .btn{padding:11px 12px;font-size:12px}

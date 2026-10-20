@@ -13,7 +13,7 @@
     for (const it of items || []) {
       const p = byId[it && it.id];
       const qty = Math.min(MAX_QTY, Math.max(0, Math.floor(Number(it && it.qty) || 0)));
-      if (!p || !qty) continue;
+      if (!p || p.soldOut || !qty) continue;           // sold-out pieces can't be bought
       lines.push({ id: p.id, name: p.name, img: p.img, qty, unitCents: p.priceCents, lineCents: p.priceCents * qty });
     }
     const subtotal = lines.reduce((s, l) => s + l.lineCents, 0);
